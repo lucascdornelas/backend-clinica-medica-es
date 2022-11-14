@@ -1,1 +1,7 @@
-{}
+{
+  "singleQuote": false,
+  "eslintIntegration": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "quoteProps": "consistent"
+}
