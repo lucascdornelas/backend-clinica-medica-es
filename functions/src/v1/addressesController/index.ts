@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as functions from "firebase-functions";
-import db from "../helpers";
+import db from "../../helpers/firebase";
 
 const addressCollection = "endereco";
 
