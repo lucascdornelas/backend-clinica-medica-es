@@ -101,6 +101,23 @@ export default {
     }
   },
 
+  getAll: async (request: Request, response: Response) => {
+    functions.logger.info(`[GET] - ALL`);
+
+    const documents = await db
+      .collection(cepCollection)
+      .withConverter(cepConverter)
+      .get();
+
+    if (!documents.empty) {
+      const cepDatas = documents.docs.map((doc) => doc.data());
+
+      response.status(200).send({ result: cepDatas });
+    } else {
+      response.status(404).send({ message: "Not Found" });
+    }
+  },
+
   post: async (request: Request, response: Response) => {
     functions.logger.info("[POST] - CEP", { structuredData: true });
 
