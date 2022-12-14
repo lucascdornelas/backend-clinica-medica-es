@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 // Cep Routes
 app.get("/", CepController.getAll);
 app.get("/:cep", CepController.getById);
+app.get("/", CepController.getAll);
+app.get("/:customer", CepController.getById);
 app.post("/", validateTokenId, CepController.post);
 app.put("/", validateTokenId, CepController.put);
 app.patch("/", validateTokenId, CepController.patch);
