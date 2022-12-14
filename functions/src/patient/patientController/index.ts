@@ -8,49 +8,58 @@ const patientController = "patient";
  *  * A class that can validate patient and return object model.
  */
 class Patient {
-  cep: string;
-  avatarUrl: string;
-  createdAt: string;
-  email: string;
-  id: string;
   name: string;
+  email: string;
   phone: string;
+
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+
   weigth: number;
   heigth: number;
   bloodType: string;
 
   /**
    *  * A constructor model
-   * @param {string} cep The 1st string.
-   * @param {string} avatarUrl The 2nd string.
-   * @param {string} createdAt The 3rd string.
-   * @param {string} email The 4th string.
-   * @param {string} id The 5th string.
-   * @param {string} name The 6th string.
-   * @param {string} phone The 7th string.
+   * @param {string} name The 1st string.
+   * @param {string} email The 2nd string.
+   * @param {string} phone The 3rd string.
+   * @param {string} cep The 4th string.
+   * @param {string} logradouro The 5th string.
+   * @param {string} bairro The 6th string.
+   * @param {string} estado The 7th string.
    * @param {string} weigth The 8th string.
    * @param {string} heigth The 9th string.
    * @param {string} bloodType The 10th string.
    */
   constructor(
-    cep: string,
-    avatarUrl: string,
-    createdAt: string,
-    email: string,
-    id: string,
     name: string,
+    email: string,
     phone: string,
+
+    cep: string,
+    logradouro: string,
+    bairro: string,
+    cidade: string,
+    estado: string,
+
     weigth: number,
     heigth: number,
     bloodType: string
-  ) {
-    (this.cep = cep),
-      (this.avatarUrl = avatarUrl),
-      (this.createdAt = createdAt),
-      (this.email = email),
-      (this.id = id),
+    ) {
       (this.name = name),
+      (this.email = email),
       (this.phone = phone),
+
+      (this.cep = cep),
+      (this.logradouro = logradouro),
+      (this.bairro = bairro),
+      (this.cidade = cidade),
+      (this.estado = estado),
+
       (this.weigth = weigth),
       (this.heigth = heigth),
       (this.bloodType = bloodType);
@@ -71,16 +80,19 @@ class Patient {
    */
   toObject() {
     return {
-      cep: this.cep,
-      avatarUrl : this.avatarUrl,
-      createdAt: this.createdAt,
-      email: this.email,
-      id: this.id,
       name: this.name,
+      email: this.email,
       phone: this.phone,
+
+      cep: this.cep,
+      logradouro: this.logradouro,
+      bairro: this.bairro,
+      cidade: this.cidade,
+      estado: this.estado,
+
       weigth: this.weigth,
       heigth: this.heigth,
-      bloodType: this.bloodType,
+      bloodType: this.bloodType
     };
   }
 }
@@ -140,28 +152,17 @@ export default {
     const { body } = request;
 
     try {
-      const {
-        cep,
-        avatarUrl,
-        createdAt,
-        email,
-        id,
-        name,
-        phone,
-        weigth,
-        heigth,
-        bloodType
-      } = body;
+      const { name, email, phone, cep, logradouro, bairro, cidade, estado, weigth, heigth, bloodType } = body;
 
-      const patientModel = new Patient(cep, avatarUrl, createdAt, email, id, name, phone, weigth, heigth, bloodType);
+      const patientModel = new Patient( name, email, phone, cep, logradouro, bairro, cidade, estado, weigth, heigth, bloodType );
 
       if (patientModel.validatorCep()) {
         await db
           .collection(patientController)
-          .doc(id)
+          .doc(name)
           .create(patientModel.toObject());
 
-        response.status(201).send(`Created a new patient: ${id}`);
+        response.status(201).send(`Created a new patient: ${name}`);
       } else {
         response.status(400).send("Error: Invalid Patient CEP!");
       }

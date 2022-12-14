@@ -3,7 +3,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
 
-import PatientController from "./patientController";
+import PatientController from "./PatientController";
 import { validateTokenId } from "./helpers";
 
 const app = express();
