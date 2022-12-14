@@ -3,7 +3,9 @@ O projeto foi desenvolvido utilizando Java, [React Js](https://pt-br.reactjs.org
 
 Link para o nosso front-end: https://github.com/anajvelasque/LES_Projeto2
 
-## Como rodar a aplicação:
+* Para que a aplicação funcione da forma correta, é necessário rodar o front-end e o back-end simultaneamente. 
+
+## Como rodar o back-end da aplicação:
 - Clone o repositório
 - Entre na pasta function
 - Rode o comando: ```npm install```
